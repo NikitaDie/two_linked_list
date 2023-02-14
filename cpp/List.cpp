@@ -46,6 +46,8 @@ ListItem<T>* List<T>::find(uint id)
         iterator = fromHead ? iterator->getNext() : iterator->getPrev();
         i += factor;
     }
+
+    return nullptr;
 }
 
 template<class T>
@@ -132,9 +134,29 @@ int List<T>::getCount() const
 }
 
 template<class T>
-const T& List<T>::peak(uint id) //do const?, then i need "const find()"
+T List<T>::peak(uint id) 
 {
     return this->find(id)->getVal();
+}
+
+template<class T>
+T List<T>::popFront()
+{
+    if (this->head == nullptr) 
+    {
+        std::cout << "list is empty" << std::endl;
+        return T{}; //TODO throw exception
+    }
+    
+    ListItem<T>* temp = this->head;
+    T tmp_val = temp->getVal();
+
+    temp->getNext()->setPrev(nullptr);
+
+    this->head = temp->getNext();
+    delete temp;
+
+    return tmp_val;
 }
 
 template<class T>

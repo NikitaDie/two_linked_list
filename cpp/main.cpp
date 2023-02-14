@@ -44,11 +44,15 @@ int main()
     list.show();
 
     list.insert(0, 128);
-
     list.insert(list.getCount(), 256);
-
     list.insert(5, 2048);
-    
+
     list.show();
+
+    list.popFront();
+    list.show();
+
+    std::cout << list.peak(4) << std::endl;
+
     return 0;
 }

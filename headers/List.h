@@ -41,13 +41,13 @@ public:
 // base
     int getCount() const;
 
-    const T& peak(uint id); 
+    T peak(uint id); 
 
-    const T& popFront(uint id);
+    T popFront();
 
-    const T& popBack(uint id);
+    T popBack();
 
-    const T& remove(uint id);
+    T remove(uint id);
 
     void pushFront(const T& val);
 
