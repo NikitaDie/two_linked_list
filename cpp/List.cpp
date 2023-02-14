@@ -156,6 +156,63 @@ T List<T>::popFront()
     this->head = temp->getNext();
     delete temp;
 
+    --this->count;
+    return tmp_val;
+}
+
+template<class T>
+T List<T>::popBack()
+{
+    if (this->tail == nullptr) 
+    {
+        std::cout << "list is empty" << std::endl;
+        return T{}; //TODO throw exception
+    }
+    
+    ListItem<T>* temp = this->tail;
+    T tmp_val = temp->getVal();
+
+    temp->getPrev()->setNext(nullptr);
+
+    this->tail = temp->getPrev();
+    delete temp;
+
+    --this->count;
+    return tmp_val;
+}
+
+template<class T>
+T List<T>::remove(uint id)
+{
+    if (this->count == 0) 
+    {
+        std::cout << "list is empty" << std::endl;
+        return T{}; //TODO throw exception
+    }
+
+    if(id >= this->count){
+        std::cout << "this elemet doesn`t exsist" << std::endl;
+        return T{}; //TODO throw exception
+    }
+
+    if (id == 0)
+        return popFront();
+
+    if (id == this->count - 1)
+        return popBack();
+
+    ListItem<T>* temp = this->find(id);
+    T tmp_val = temp->getVal();
+
+    ListItem<T>* prev = this->find(id - 1);
+    ListItem<T>* next = this->find(id + 1);
+
+    prev->setNext(next);
+    next->setPrev(prev);
+
+    delete temp;
+
+    --this->count;
     return tmp_val;
 }
 
@@ -206,22 +263,30 @@ void List<T>::pushBack(const T& val)
 template<class T>
 void List<T>::insert(uint id, const T& val)
 {
-    if (id == 0) pushFront(val);
-
-    else if (id >= this->count) pushBack(val);
-
-    else {
-        ListItem<T>* temp = new ListItem<T>{ val };
-
-        ListItem<T>* prev = this->find(id - 1);
-        ListItem<T>* next = this->find(id);
-
-        temp->setPrev(prev);
-        temp->setNext(next);
-
-        prev->setNext(temp);
-        next->setPrev(temp);
+    if (id == 0)
+    {
+        pushFront(val);
+        return;
     }
+        
+    if (id >= this->count)
+    {
+        pushBack(val);
+        return;
+    }
+
+    ListItem<T>* temp = new ListItem<T>{ val };
+
+    ListItem<T>* prev = this->find(id - 1);
+    ListItem<T>* next = this->find(id);
+
+    temp->setPrev(prev);
+    temp->setNext(next);
+
+    prev->setNext(temp);
+    next->setPrev(temp);
+    
+    ++this->count;
 }
 
 template<class T>
