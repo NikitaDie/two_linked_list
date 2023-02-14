@@ -24,12 +24,12 @@ public:
 
     List(List<T>&& obj);
 
+//operators overloading
     List<T>& operator=(const List<T>& obj);
 
     List<T>& operator=(List<T>&& obj);
 
-//operators overloading
-    T& operator[](uint id);
+    ListItem<T>& operator[](uint id);
 
     List<T>& operator+=(const List<T>& obj);
 
@@ -60,7 +60,7 @@ public:
 // additional
     void swap(uint id1, uint id2);
 
-    void removeDuplicates();
+    void removeDuplicates(); // mak`s no sence 
 
     List<T> slice(uint startId, uint count);
 

@@ -84,6 +84,7 @@ List<T>::List(List<T>&& obj) :
     obj.count = 0;
 }
 
+//operators overloading
 template<class T>
 List<T>& List<T>::operator=(const List<T>& obj)
 {
@@ -125,6 +126,51 @@ List<T>& List<T>::operator=(List<T>&& obj)
     return *this;
 }
 
+template<class T>
+ListItem<T>& List<T>::operator[](uint id)
+{
+    return *this->find(id);
+}
+
+template<class T>
+List<T>& List<T>::operator+=(const List<T>& obj) // void? 
+{
+    ListItem<T>* iterator = obj.head;
+
+    while (iterator != nullptr)
+    {
+        this->pushBack(iterator->getVal());
+
+        iterator = iterator->getNext();
+    }   
+
+    return *this;   
+}
+
+template<class T>
+bool List<T>::operator==(const List<T>& obj)
+{
+    if (this->count != obj.count)
+        return false;
+
+    ListItem<T>* iterator = this->head;
+
+    while (iterator!= nullptr)
+    {
+        if (iterator->getVal() != obj.head->getVal())
+            return false;
+
+        iterator = iterator->getNext();
+    }
+
+    return true;
+}
+
+template<class T>
+bool List<T>::operator!=(const List<T>& obj)
+{
+    return !(*this == obj);
+}
 
 // base
 template<class T>

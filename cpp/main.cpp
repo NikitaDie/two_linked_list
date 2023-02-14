@@ -131,5 +131,6 @@ int main()
     list.remove(4);
     list.show();*/
 
+
     return 0;
 }
