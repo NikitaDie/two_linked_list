@@ -5,7 +5,7 @@
 int main()
 {
     List<int> list;
-    
+
     list.pushFront(1);
     list.pushFront(2);
     list.pushFront(3);
@@ -43,5 +43,12 @@ int main()
     list.swap(0, list.getCount() - 1);
     list.show();
 
+    list.insert(0, 128);
+
+    list.insert(list.getCount(), 256);
+
+    list.insert(5, 2048);
+    
+    list.show();
     return 0;
 }

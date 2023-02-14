@@ -123,10 +123,18 @@ List<T>& List<T>::operator=(List<T>&& obj)
     return *this;
 }
 
+
+// base
 template<class T>
 int List<T>::getCount() const
 {
     return this->count;
+}
+
+template<class T>
+const T& List<T>::peak(uint id) //do const?, then i need "const find()"
+{
+    return this->find(id)->getVal();
 }
 
 template<class T>
@@ -173,6 +181,50 @@ void List<T>::pushBack(const T& val)
     ++this->count;
 }
 
+template<class T>
+void List<T>::insert(uint id, const T& val)
+{
+    if (id == 0) pushFront(val);
+
+    else if (id >= this->count) pushBack(val);
+
+    else {
+        ListItem<T>* temp = new ListItem<T>{ val };
+
+        ListItem<T>* prev = this->find(id - 1);
+        ListItem<T>* next = this->find(id);
+
+        temp->setPrev(prev);
+        temp->setNext(next);
+
+        prev->setNext(temp);
+        next->setPrev(temp);
+    }
+}
+
+template<class T>
+void List<T>::show()
+{
+    if (this->count == 0)
+    {
+        std::cout << "List is empty" << std::endl;
+        return;
+    }
+
+    ListItem<T>* iterator = this->head;
+
+    while (iterator != nullptr)
+    {
+        std::cout << iterator->getVal() << " ";
+        iterator = iterator->getNext();
+    }
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+}
+
+
+// additional
 template<class T>
 void List<T>::swap(uint id1, uint id2)
 {
@@ -223,27 +275,8 @@ void List<T>::swap(uint id1, uint id2)
     }
 }
 
-template<class T>
-void List<T>::show()
-{
-    if (this->count == 0)
-    {
-        std::cout << "List is empty" << std::endl;
-        return;
-    }
 
-    ListItem<T>* iterator = this->head;
-
-    while (iterator != nullptr)
-    {
-        std::cout << iterator->getVal() << " ";
-        iterator = iterator->getNext();
-    }
-
-    std::cout << std::endl;
-    std::cout << std::endl;
-}
-
+//
 template<class T>
 List<T>::~List()
 {
