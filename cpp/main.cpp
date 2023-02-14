@@ -5,6 +5,15 @@
 int main()
 {
     List<int> list;
+    
+    list.pushFront(1);
+    list.pushFront(2);
+    list.pushFront(3);
+    list.pushFront(4);
+    list.pushFront(5);
+
+    list.show();
+
     list.pushBack(34);
     list.pushBack(45);
     list.pushBack(67);

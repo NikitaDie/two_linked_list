@@ -130,6 +130,29 @@ int List<T>::getCount() const
 }
 
 template<class T>
+void List<T>::pushFront(const T& val)
+{
+    ListItem<T>* temp = new ListItem<T>{ val };
+
+    temp->setPrev(nullptr);
+
+    if (this->head != nullptr)
+    {
+        temp->setNext(this->head);
+        temp->getNext()->setPrev(temp);
+    } 
+    else 
+    {
+        temp->setNext(nullptr);
+        this->tail = temp;
+    }
+
+    this->head = temp;
+
+    ++this->count;
+}
+
+template<class T>
 void List<T>::pushBack(const T& val)
 {
     ListItem<T>* temp = new ListItem<T>{ val };
