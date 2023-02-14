@@ -131,6 +131,10 @@ int main()
     list.remove(4);
     list.show();*/
 
+    list.reverse();
+    list.show();
+    
+    list.slice(0, 6).show();
 
     return 0;
 }

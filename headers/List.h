@@ -60,9 +60,7 @@ public:
 // additional
     void swap(uint id1, uint id2);
 
-    void removeDuplicates(); // mak`s no sence 
-
-    List<T> slice(uint startId, uint count);
+    List<T> slice(uint startId, uint endId);
 
     List<T>& reverse();
 

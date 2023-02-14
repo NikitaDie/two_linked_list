@@ -408,6 +408,59 @@ void List<T>::swap(uint id1, uint id2)
     }
 }
 
+template<class T>
+List<T> List<T>::slice(uint startId, uint endId)
+{
+
+    if(endId >= getCount() || startId >= getCount())
+    {
+        std::cout << "Slice out of range" << std::endl;
+
+        return List<T>(); // TODO throw exception
+    }
+
+    List<T> newList;
+
+    ListItem<T>* iterator = this->find(startId);
+
+    ListItem<T>* breakPoint = this->find(endId + 1);
+
+    while (iterator != breakPoint)
+    {
+        newList.pushBack(iterator->getVal());
+        iterator = iterator->getNext();
+    }
+
+    return newList;
+}
+
+template <class T>
+List<T>& List<T>::reverse()
+{
+    if (this->count == 0)
+    {
+        std::cout << "List is empty" << std::endl;
+        return *this;
+    }
+
+    ListItem<T>* iterator = this->head;
+    ListItem<T>* tmp{ nullptr };
+
+    while (iterator != nullptr)
+    {
+        tmp = iterator->getNext();
+        iterator->setNext(iterator->getPrev());
+        iterator->setPrev(tmp);
+
+        iterator = tmp;
+    }
+
+    tmp = this->head;
+    this->head = this->tail;
+    this->tail = tmp;
+   
+    return *this;
+}
 
 //
 template<class T>
