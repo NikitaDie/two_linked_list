@@ -88,7 +88,7 @@ List<T>::List(List<T>&& obj) :
 template<class T>
 List<T>& List<T>::operator=(const List<T>& obj)
 {
-    if (this!= &obj)
+    if (this == &obj)
         return *this;
     
     if (this->head != nullptr || this->tail != nullptr || this->count > 0) 
@@ -109,7 +109,7 @@ List<T>& List<T>::operator=(const List<T>& obj)
 template<class T>
 List<T>& List<T>::operator=(List<T>&& obj)
 {
-    if (this!= &obj)
+    if (this == &obj)
         return *this;
 
     if (this->head!= nullptr || this->tail!= nullptr || this->count > 0) 
