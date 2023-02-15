@@ -55,7 +55,7 @@ public:
 
     void insert(uint id, const T& val);
 
-    void show();
+    void show() const;
 
 // additional
     void swap(uint id1, uint id2);

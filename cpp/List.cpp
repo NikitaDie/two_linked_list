@@ -250,8 +250,8 @@ T List<T>::remove(uint id)
     ListItem<T>* temp = this->find(id);
     T tmp_val = temp->getVal();
 
-    ListItem<T>* prev = this->find(id - 1);
-    ListItem<T>* next = this->find(id + 1);
+    ListItem<T>* prev = temp->getPrev();
+    ListItem<T>* next = temp->getNext();
 
     prev->setNext(next);
     next->setPrev(prev);
@@ -336,7 +336,7 @@ void List<T>::insert(uint id, const T& val)
 }
 
 template<class T>
-void List<T>::show()
+void List<T>::show() const
 {
     if (this->count == 0)
     {
